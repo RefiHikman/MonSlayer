@@ -1,0 +1,364 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Poppins;
+    color: #ddd;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #232323;
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Main */
+.copyright {
+    position: absolute;
+    bottom: -70px;
+    right: -50px;
+}
+
+.copyright img {
+    width: 300px;
+}
+
+.title-play {
+    position: absolute;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-btn {
+    font-size: 1.3rem;
+    font-weight: bold;
+    width: 200px;
+    padding: 15px 0;
+    border: 0;
+    border-radius: 50px;
+    background-color: #111;
+    color: #ddd;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.play-btn:hover {
+    background-color: #000;
+}
+
+/* Stage List Modal */
+.stage-modal {
+    width: 80%;
+    height: 90%;
+    z-index: 100;
+    background-color: #111;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    transform: translateY(30%);
+    transition: .4s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.stage-modal-title {
+    font-size: 2.8rem;
+    margin: 20px auto;
+}
+
+.stage-list {
+    width: 80%;
+    margin: 25px auto;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    place-items: center;
+    gap: 35px;
+}
+
+.stage-wrapper {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.stage {
+    width: 100px;
+    height: 100px;
+    background-color: #232323;
+    display: grid;
+    place-items: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: .2s;
+}
+
+.stage:hover {
+    transform: scale(120%);
+}
+
+.stage-none {
+    background-color: rgba(0, 0, 0, 0.6);
+    cursor: default;
+    color: #333;
+}
+
+.close {
+    background-color: rgba(0, 0, 0, 0);
+    color: #ddd;
+    font-size: 3.5rem;
+    width: 50px;
+    height: 50px;
+    border: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    cursor: pointer;
+}
+
+.wipe {
+    height: 100vh;
+    width: 100vw;
+    background-color: #232323;
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: .5s;
+}
+
+.unwipe {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Mouse Trail */
+.trailer {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 100;
+    font-size: 2rem;
+    color: #232323;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+}
+
+body:hover>.trailer {
+    opacity: 1;
+}
+
+/* Background */
+/* .bg1 {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(127, 255, 212, 0.301);
+    position: absolute;
+    z-index: -1;
+    border-radius: 100%;
+    animation: 20s ease 0s infinite bg1;
+    pointer-events: none;
+}
+
+.bg2 {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(240, 128, 128, 0.308);
+    position: absolute;
+    transform: translate(1000%);
+    z-index: -1;
+    border-radius: 100%;
+    animation: 15s ease 0.5s infinite bg2;
+    pointer-events: none;
+}
+
+.bg3 {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(172, 255, 47, 0.322);
+    position: absolute;
+    transform: translate(1000%);
+    z-index: -1;
+    border-radius: 100%;
+    animation: 10s ease 1s infinite bg3;
+    pointer-events: none;
+}
+
+.bg4 {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255, 140, 0, 0.301);
+    position: absolute;
+    transform: translate(1000%);
+    z-index: -1;
+    border-radius: 100%;
+    animation: 25s ease 1.5s infinite bg4;
+    pointer-events: none;
+}
+
+.bg5 {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(238, 130, 238, 0.315);
+    position: absolute;
+    transform: translate(1000%);
+    z-index: -1;
+    border-radius: 100%;
+    animation: 27s ease 2s infinite bg5;
+    pointer-events: none;
+} */
+
+/* Javascript Class-List */
+.show {
+    transform: translate(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+#modal-backdrop {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    display: none;
+}
+
+#modal-backdrop.active {
+    opacity: 1;
+    display: block;
+}
+
+/* Animation */
+/* @keyframes bg1 {
+    0% {
+        transform: translateX(-350%) translateY(-100%);
+    }
+
+    30% {
+        transform: translateX(200%) translateY(200%);
+    }
+
+    50% {
+        transform: translateX(0%) translateY(0%);
+    }
+
+    70% {
+        transform: translateX(300%) translateY(-100%);
+    }
+
+    100% {
+        transform: translateX(-350%) translateY(-100%);
+    }
+}
+
+@keyframes bg2 {
+    0% {
+        transform: translateX(400%) translateY(100%);
+    }
+
+    30% {
+        transform: translateX(-200%) translateY(-200%);
+    }
+
+    50% {
+        transform: translateX(20%) translateY(20%);
+    }
+
+    70% {
+        transform: translateX(-300%) translateY(100%);
+    }
+
+    100% {
+        transform: translateX(400%) translateY(100%);
+    }
+}
+
+@keyframes bg3 {
+    0% {
+        transform: translateX(-350%) translateY(200%);
+    }
+
+    30% {
+        transform: translateX(100%) translateY(-200%);
+    }
+
+    50% {
+        transform: translateX(-20%) translateY(-20%);
+    }
+
+    70% {
+        transform: translateX(-100%) translateY(150%);
+    }
+
+    100% {
+        transform: translateX(-350%) translateY(200%);
+    }
+}
+
+@keyframes bg4 {
+    0% {
+        transform: translateX(200%) translateY(-250%);
+    }
+
+    30% {
+        transform: translateX(-100%) translateY(-100%);
+    }
+
+    50% {
+        transform: translateX(40%) translateY(40%);
+    }
+
+    70% {
+        transform: translateX(200%) translateY(150%);
+    }
+
+    100% {
+        transform: translateX(200%) translateY(-250%);
+    }
+}
+
+@keyframes bg5 {
+    0% {
+        transform: translateX(100%) translateY(250%);
+    }
+
+    30% {
+        transform: translateX(100%) translateY(-100%);
+    }
+
+    50% {
+        transform: translateX(20%) translateY(-30%);
+    }
+
+    70% {
+        transform: translateX(-100%) translateY(100%);
+    }
+
+    100% {
+        transform: translateX(200%) translateY(-250%);
+    }
+} */

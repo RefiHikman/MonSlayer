@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>MonSlayer - Stage 9</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon -->
+    <link rel="icon" href="../../media/circle.png">
+    <script src="https://kit.fontawesome.com/3bdf8f4880.js" crossorigin="anonymous"></script>
+
+    <!-- Style -->
+    <link rel="stylesheet" href="../stages.css">
+
+    <style>
+        .background {
+            height: 100vh;
+            width: 100vw;
+            background: url(/media/bg/bg8.gif);
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .main-monster img {
+            width: 35vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <!-- MAIN MONSTER -->
+    <div class="main-monster">
+        <img src="/media/monster/monster9.gif">
+    </div>
+
+    <!-- START BUTTON -->
+    <div class="start-btn">
+        <i class="fa-solid fa-play"></i>
+    </div>
+    <div id="start-backdrop"></div>
+
+    <!-- TRAILER -->
+    <!-- <div class="trailer">
+    </div> -->
+
+    <!-- HEALTH -->
+    <div class="health-container">
+        <h1>Rathian</h1>
+        <div class="health">
+            <div class="health-bar"></div>
+        </div>
+    </div>
+
+    <!-- TIMER -->
+    <h1 class="timer">00:10</h1>
+
+    <!-- BACK BUTTON -->
+    <a href="/index.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+
+    <!-- HINT -->
+    <h2 class="click-to-r">Press R to restart</h2>
+
+    <!-- FINISH MODAL -->
+    <div class="finish-modal">
+        <h1 class="slayed-text">MONSTER SLAYED</h1>
+        <div class="finish-modal-btns">
+            <a href="/index.html">
+                <i class="fa-solid fa-home"></i>
+            </a>
+            <a href="">
+                <i class="fa-solid fa-rotate-right"></i>
+            </a>
+            <a href="../10/stage10.html">
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+    <div id="modal-backdrop" class="active"></div>
+
+    <!-- WIPE -->
+    <div class="wipe"></div>
+
+    <!-- Script -->
+    <script src="/media/anime-master/lib/anime.min.js"></script>
+    <script src="../stages.js"></script>
+
+    <!-- STAGES SCRIPT -->
+    <script>
+        // DAMAGE
+        let damage = .5;
+
+        // Check Previous Stage's State
+        startBtn.addEventListener("click", startGame);
+        function startGame() {
+            startBtn.classList.add("disappear");
+            backBtn.classList.add("disappear");
+            restartText.classList.add("disappear");
+            startBackdrop.classList.add("inactive");
+            healthContainer.classList.add("appear");
+            background.style.width = "150vw";
+            background.style.height = "150vh";
+            background.style.transition = "5s";
+
+            // DELAY
+            setTimeout(function () {
+                let minutes = 60 * 0.16,
+                    timer = document.querySelector(".timer");
+                startTimer(minutes, timer);
+
+                timer.classList.add("appear");
+                mainMonster.style.visibility = "visible";
+                mainMonster.style.opacity = "1";
+                setTimeout(function () {
+                    mainMonster.style.transition = "0.2s";
+                }, 500);
+
+                randomValues();
+                backgroundMove();
+            }, 1500);
+        }
+        let modalBackdrop = document.querySelector("#modal-backdrop");
+        let prevStage = localStorage.getItem("stage8");
+        if (prevStage) {
+            modalBackdrop.classList.remove("active")
+        } else {
+            startBtn.removeEventListener("click", startGame)
+        }
+
+        // Animation
+        function randomValues() {
+            anime({
+                targets: `.main-monster`,
+                translateX: function () {
+                    return anime.random(-650, 650);
+                },
+                translateY: function () {
+                    return anime.random(-300, 250);
+                },
+                easing: "easeInElastic(1, .6)",
+                duration: 2000,
+                complete: randomValues,
+            });
+        }
+
+        // Timer
+        function startTimer(duration, display) {
+            let timer = duration,
+                minutes,
+                seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                let finishModal = document.querySelector(".finish-modal");
+                let finishBtns = document.querySelector(".finish-modal-btns");
+                let slayedText = document.querySelector(".slayed-text");
+
+                // Game Finished FAILED
+                if (--timer < 0 && healthPoint > 0) {
+                    timer = 0;
+                    damage = 0;
+                    anime.remove(".main-monster");
+                    slayedText.innerText = "YOU'RE SLAYED";
+                    finishModal.classList.add("show");
+
+                    anime({
+                        targets: ".main-monster",
+                        translateX: 0,
+                        translateY: 0,
+                        delay: 200,
+                    });
+
+                    setTimeout(function () {
+                        modalBackdrop.classList.add("active");
+
+                        setTimeout(function () {
+                            slayedText.classList.add("show");
+
+                            setTimeout(function () {
+                                finishBtns.classList.add("show");
+                            }, 1500);
+                        }, 800);
+                    }, 1500);
+                }
+
+                // Game Finished SUCCEED
+                if (healthPoint <= 0) {
+                    timer = 0;
+                    damage = 0;
+                    anime.remove(".main-monster");
+                    finishModal.classList.add("show");
+
+                    anime({
+                        targets: ".main-monster",
+                        translateX: 0,
+                        translateY: 0,
+                    });
+                    anime({
+                        targets: ".main-monster",
+                        opacity: 0,
+                        delay: 800,
+                    });
+
+                    setTimeout(function () {
+                        modalBackdrop.classList.add("active");
+
+                        setTimeout(function () {
+                            slayedText.classList.add("show");
+
+                            setTimeout(function () {
+                                finishBtns.classList.add("show");
+                            }, 1500);
+                        }, 800);
+                    }, 1500);
+
+                    localStorage.setItem(`stage9`, true);
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
