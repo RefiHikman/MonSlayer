@@ -115,7 +115,7 @@ body {
     top: 0;
     left: 1vw;
     font-weight: 600;
-    z-index: 2;
+    z-index: 1000;
     animation: .8s ease-out 0s 1 onload-pop;
     cursor: pointer;
     text-shadow: 2px 2px 2px black;

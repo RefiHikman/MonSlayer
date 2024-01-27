@@ -1,3 +1,33 @@
+// BG Music
+let bgMusic = document.querySelector("#bg-music");
+let audioControl = document.querySelector(".audio-control");
+let volumeActive = document.querySelector(".volume-active");
+let volumeInactive = document.querySelector(".volume-inactive");
+
+window.onload = function () {
+    bgMusic.play();
+    if (bgMusic.paused) {
+        volumeInactive.style.display = "block";
+        volumeActive.style.display = "none";
+    } else {
+        volumeInactive.style.display = "none";
+        volumeActive.style.display = "block";
+    }
+};
+
+audioControl.addEventListener("click", audioPausePlay);
+function audioPausePlay() {
+    if (!bgMusic.paused) {
+        bgMusic.pause();
+        volumeInactive.style.display = "block";
+        volumeActive.style.display = "none";
+    } else {
+        bgMusic.play();
+        volumeInactive.style.display = "none";
+        volumeActive.style.display = "block";
+    }
+}
+
 // Mouse Trail
 let trailer = document.querySelector(".trailer");
 

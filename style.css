@@ -25,17 +25,17 @@ a {
 /* Main */
 .copyright {
     position: absolute;
-    bottom: -70px;
-    right: -50px;
+    bottom: 1vh;
+    right: 1vw;
 }
 
 .copyright img {
-    width: 300px;
+    width: 20vh;
 }
 
 .title-play {
     position: absolute;
-    top: 100px;
+    top: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,12 +43,12 @@ a {
 }
 
 .play-btn {
-    font-size: 1.3rem;
+    font-size: 2.8vh;
     font-weight: bold;
-    width: 200px;
-    padding: 15px 0;
+    width: 13.5vw;
+    padding: 2vh 0;
     border: 0;
-    border-radius: 50px;
+    border-radius: 5vw;
     background-color: #111;
     color: #ddd;
     cursor: pointer;
@@ -59,13 +59,31 @@ a {
     background-color: #000;
 }
 
+.audio-control {
+    font-size: 5vh;
+    position: fixed;
+    top: 2.3vh;
+    right: 3.5vw;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.volume-active {
+    position: absolute;
+    display: none;
+}
+
+.volume-inactive {
+    position: absolute;
+}
+
 /* Stage List Modal */
 .stage-modal {
     width: 80%;
     height: 90%;
     z-index: 100;
     background-color: #111;
-    border-radius: 8px;
+    border-radius: 1.2vh;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -76,35 +94,28 @@ a {
 }
 
 .stage-modal-title {
-    font-size: 2.8rem;
-    margin: 20px auto;
+    font-size: 6.7vh;
+    margin: 3vw auto;
 }
 
 .stage-list {
     width: 80%;
-    margin: 25px auto;
+    margin: 3.7vh auto;
     display: grid;
     grid-template-columns: auto auto auto auto;
     place-items: center;
-    gap: 35px;
-}
-
-.stage-wrapper {
-    width: 100px;
-    height: 100px;
-    background-color: white;
-    border-radius: 4px;
+    gap: 5vh;
 }
 
 .stage {
-    width: 100px;
-    height: 100px;
+    width: 7vw;
+    height: 15vh;
     background-color: #232323;
     display: grid;
     place-items: center;
-    font-size: 1.8rem;
+    font-size: 4.3vh;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 0.6vh;
     transition: .2s;
 }
 
@@ -121,16 +132,16 @@ a {
 .close {
     background-color: rgba(0, 0, 0, 0);
     color: #ddd;
-    font-size: 3.5rem;
-    width: 50px;
-    height: 50px;
+    font-size: 8.4vh;
+    width: 3.6vw;
+    height: 7.5vh;
     border: 0;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 20px;
-    right: 40px;
+    top: 3vh;
+    right: 2.9vw;
     cursor: pointer;
 }
 
@@ -150,8 +161,8 @@ a {
 
 /* Mouse Trail */
 .trailer {
-    width: 50px;
-    height: 50px;
+    width: 3.6vw;
+    height: 7.5vh;
     border-radius: 100%;
     background-color: rgba(255, 255, 255, 0.5);
     z-index: 100;

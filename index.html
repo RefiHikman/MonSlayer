@@ -22,13 +22,24 @@
 </head>
 
 <body>
+    <!-- MUSIC -->
+    <div class="audio-control">
+        <i class="volume-active fa-solid fa-volume-low"></i>
+        <i class="volume-inactive fa-solid fa-volume-xmark"></i>
+    </div>
+
+    <audio id="bg-music" hidden loop>
+        <source src="./media/music/bg.mp3" type="audio/mp3">
+        <p>Your browser does not support audio element</p>
+    </audio>
+
     <!-- TRAILER -->
     <div class="trailer">
     </div>
 
     <!-- MIDDLE SECTION -->
     <div class="title-play">
-        <svg class="svg" version="1.0" width="350px" height="350px" viewBox="0 0 968.000000 766.000000"
+        <svg class="svg" version="1.0" width="25vw" height="52vh" viewBox="0 0 968.000000 766.000000"
             preserveAspectRatio="xMidYMid meet">
 
             <g transform="translate(0, 766) scale(0.1, -0.1)" fill="#fff" stroke="none">

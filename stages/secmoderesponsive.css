@@ -1,0 +1,39 @@
+/* Responsive */
+@media (0px <= width <= 768px) {
+    html,
+    body,
+    section {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        overflow: hidden;
+    }
+    /* Mouse Trail */
+    .trailer {
+        display: none;
+    }
+
+    /* Main */
+    .timer {
+        font-size: 2rem;
+        top: 10px;
+    }
+    .back-btn {
+        font-size: 2.5rem;
+        top: 10px;
+    }
+    .space-to-s {
+        font-size: 1.5rem;
+    }
+    .click-to-r {
+        font-size: 1rem;
+    }
+
+    /* Navbar */
+    .navbar {
+        top: 60px;
+    }
+    .keybind {
+        display: none;
+    }
+}
